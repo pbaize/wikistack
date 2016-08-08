@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 const swig = require('swig')
 const routes = require('./routes')
 const path = require('path')
+const models = require('./models')
+const wikiRouter = require('./routes/wiki')
 
 const app = express()
 
@@ -18,5 +20,11 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static('public'))
 
-app.listen(1337)
-app.use(routes)
+models.User.sync({})
+  .then(function () {
+    return models.Page.sync({})
+  })
+  .then(function () {
+    app.listen(1337)
+  })
+app.use('/wiki', wikiRouter)
