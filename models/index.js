@@ -19,7 +19,8 @@ const Page = db.define('page', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  status: Sequelize.BOOLEAN
+  status: Sequelize.BOOLEAN,
+  tags: Sequelize.ARRAY(Sequelize.STRING)
 }, {
   getterMethods: {
     route: function () {
@@ -43,6 +44,12 @@ const User = db.define('user', {
     isEmail: true
   }
 })
+
+Page.belongsTo(User, { as: 'author' })
+
+// const Tag = db.define('tag', {
+
+// })
 
 module.exports = {
   Page: Page,

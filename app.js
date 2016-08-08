@@ -8,6 +8,7 @@ const routes = require('./routes')
 const path = require('path')
 const models = require('./models')
 const wikiRouter = require('./routes/wiki')
+const userRouter = require('./routes/users')
 
 const app = express()
 
@@ -28,3 +29,5 @@ models.User.sync({})
     app.listen(1337)
   })
 app.use('/wiki', wikiRouter)
+app.use('/users', userRouter)
+app.use('/', routes)
