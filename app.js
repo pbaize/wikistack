@@ -9,7 +9,7 @@ const path = require('path')
 const models = require('./models')
 const wikiRouter = require('./routes/wiki')
 const userRouter = require('./routes/users')
-
+const searchRouter = require('./routes/search')
 const app = express()
 
 app.engine('html', swig.renderFile) // how to render html templates
@@ -30,4 +30,5 @@ models.User.sync({})
   })
 app.use('/wiki', wikiRouter)
 app.use('/users', userRouter)
+app.use('/search', searchRouter)
 app.use('/', routes)

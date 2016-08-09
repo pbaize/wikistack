@@ -47,6 +47,21 @@ const User = db.define('user', {
 
 Page.belongsTo(User, { as: 'author' })
 
+Page.findByTag = function (tags) {
+  return Page.findAll({
+    // $overlap matches a set of possibilities
+    where: {
+      tags: {
+        $overlap: tags
+      }
+    }
+  })
+}
+
+Page.findSimilar = function () {
+  console.log(this)
+}
+
 // const Tag = db.define('tag', {
 
 // })
